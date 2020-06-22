@@ -1,0 +1,9 @@
+[server]
+server ansible_user=root
+
+[client]
+client ansible_user=root
+
+[multi:children]
+server
+client

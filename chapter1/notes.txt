@@ -1,0 +1,11 @@
+1] Can use ansible.cfg as a default conf for some directives
+2] Test ping :
+    add inventory
+    ansible -i inventory test -m ping -u root;
+    where test = group of servers in inventory
+3] Use ssh keys or --ask-pass
+4] Use modules arguments : 
+    ansible test -a "free -h" -u root
+    To run a command against the server.
+    Without -m module the default is -m command i.e. the command module
+5] 

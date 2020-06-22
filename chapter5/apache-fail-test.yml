@@ -1,0 +1,23 @@
+---
+- name: Install Apache
+  hosts: server
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+  tasks:
+    - name: Check if http present
+      yum:
+        name: httpd
+        state: present
+
+    - name: Copy test config file
+      copy:
+        src: httpd-test.conf
+        dest: /etc/httpd/conf.d/test.conf
+      notify: restart apache
+
+    - fail:

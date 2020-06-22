@@ -1,0 +1,18 @@
+# this is the main playbook
+---
+- hosts: client
+  
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Download Solr
+      get_url:
+        url: "https://mirrors.estointernet.in/apache/lucene/solr/{{ solr_version }}"
+        dest: "{{ download_dir }}/solr-{{ solr_version }}.tgz"
+
+    - name: Expand Solr
+      unarchive:
+        src: "{{ download_dir }}/solr-{{ solr_version }}.tgz"
+        dest: "{{ download_dir }}"
+        remote_src: true

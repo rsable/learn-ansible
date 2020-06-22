@@ -1,0 +1,17 @@
+1] In a inventory you can group multiple groups as [multi:children] :
+2] Setting up vars [multi:vars]
+3] Ansible works on multiple forks. 5 generally for parellization.
+The forks can be managed by the `-f N` flag. Eg: -f 1 for 1 server att a time
+4] Every ad-hoc command run will always report as changed; even if nothing has change.
+    Eg: # ansible -i inventory test -a date -u root
+        192.168.122.10 | CHANGED | rc=0 >>
+        Thu Jun 18 01:51:44 IST 2020
+        server | CHANGED | rc=0 >>
+        Thu Jun 18 01:51:44 IST 2020
+5] Setup module will show pretty much everything ansible knows about the server.
+6] Can find documentation with :
+    # ansible-doc
+    # ansible-doc yum
+7] Limit execution to only one or multiple systems in a group :
+   # ansible -i inventory test -u root -m ping --limit "db,192.168.122.10"
+   # ansible -i inventory test -u root -m ping --limit "192.168.122.*"

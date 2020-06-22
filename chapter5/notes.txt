@@ -1,0 +1,45 @@
+** Handlers **
+
+1] Every handler is just a task. Any task can be equally written as a handler.
+2] Use a fulsh handler (meta: flush_handlers) to immediately do a handler task instead of waiting
+for the end of the playbook.
+3] A handler would not work if any of the tasks fail. Since the play will never
+reach the end of the book. In such cases use --force-handlers.
+# ansible-playbook -i inventory apache\ copy\ 2.yml --force-handlers
+4] If something else needs to be restarted with one handler multiple entrys
+can be used with notify. Since notify can be used as a list.
+        notify:
+            - restart httpd [handler1]
+            - restart nfs-server [handler2]
+5] We can also do something similar by notifying the 2nd handler though 1st handler.
+        handlers:
+         - name: restart apache
+            service:
+              name: httpd
+              state: restarted
+            notify: restart nfs-server [handler2]
+
+** Environment Variables **
+
+6] If something has to be shown on the screen you may want to register it.
+7] Use register to register values like stderr, stdout, these values are stored
+as a dict by ansible so that they can be used.
+8] Variables can be set as (while in ansible):
+        vars:
+            test_vars:
+                module: value 
+                module: value
+9] And then called from a task :
+        task:
+            - name : something
+              do module: value
+              environemnt: test_vars
+10] Or the environemnt can be declared globally (before tasks) :
+        environment :
+            module: value
+            module: value
+11] Or we can also inclued vars through a file using :
+        vars_files:
+            - /path/to/file
+12] Can use debug: vars=ansible_os_family or something similar to debug.
+13] In the above example ansible_os_family may fail if ` gather_facts: false`

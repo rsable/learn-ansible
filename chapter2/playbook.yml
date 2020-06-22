@@ -1,0 +1,28 @@
+# please dont judge for checking ssh. This is a test. I know ansible runs over ssh.
+---
+- hosts: all
+#  become: yes
+  tasks:
+   - name: Ensure ssh installed
+     yum:
+      name: openssh
+      state: present
+   - name: Ensure ssh is running
+     service: 
+      name: sshd
+      state: started
+      enabled: yes
+
+- hosts: all
+  become: yes
+  tasks:
+   - name: Ensure nfs installed
+     yum:
+      name: nfs-utils
+      state: present
+   - name: Ensure nfs is running
+     service: 
+      name: nfs-server
+      state: started
+      enabled: yes
+---

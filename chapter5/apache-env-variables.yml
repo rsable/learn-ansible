@@ -1,0 +1,33 @@
+---
+- name: Install Apache
+  hosts: server
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+  tasks:
+    - name: Check if http present
+      yum:
+        name: httpd
+        state: present
+
+    - name: Copy test config file
+      copy:
+        src: httpd-test.conf
+        dest: /etc/httpd/conf.d/test.conf
+      notify: restart apache
+
+    - name: Add env variable
+      lineinfile:
+        dest: "~/.bash_profile"
+        regexp: '^ENV_VAR='
+        line: 'ENV_VAR=value12'
+
+    - name: Get the value of an env var
+      shell: 'source ~/.bash_profile && echo $ENV_VAR'
+      register: foo
+
+    - debug: msg="Contents of variable {{ foo.stdout }}"

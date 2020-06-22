@@ -1,0 +1,4 @@
+# Install Ansible, YAML Extension for VScode
+1] Read about playbooks : https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html [Read : Action SHorthand again]
+2] Read YAML basics : https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html#yaml-syntax
+3] Vagrant provision.
