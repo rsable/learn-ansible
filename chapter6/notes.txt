@@ -1,0 +1,13 @@
+1] Creating roles
+2] Roles need to have atleast 2 basic dirs in the roles dir
+    - roles
+        - xyzrole (name of role)
+            -meta
+                - main.yml (automatically called)
+                (Mostly dependancies are given here?)
+            -tasks
+                - main.yml (automatically called)
+3] Roles are automatically picked up in the roles dir or from default roles dir in /etc or the .ansible.cfg
+4] To include roles between 2 tasks "include_roles:" can be used.
+5] A automatic role structure can be created with :
+   # ansible-galaxy role init test

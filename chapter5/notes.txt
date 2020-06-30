@@ -43,3 +43,27 @@ as a dict by ansible so that they can be used.
             - /path/to/file
 12] Can use debug: vars=ansible_os_family or something similar to debug.
 13] In the above example ansible_os_family may fail if ` gather_facts: false`
+
+** Ansible Vault **
+
+14] Encrypt files using Vault :
+    # ansible-vault encrypt vars/api_key.yml
+15] Then run using :
+    # ansible-playbook vault.yml --ask-vault-pass
+16] Or set a password file and use :
+    # ansible-playbook vault.yml --vault-password-file=.securefile.txt
+(store the file somewhere safe and not with the rest of the files :p )
+17] To edit use :
+    # ansible-vault edit vars/api_key.yml
+18]   
+
+
+** MISC **
+- "when:" can be used when a task has to be contolled depending upon condition
+- Chnaged/failed can be contolled with changed_when and failed_when by checking the output text in some cases; mostly shell or ad-command
+- Ignore can be used to set task that are going to fail so that the playbook run wont stop.
+- "tags:" can be used to tag task, roles and can be used to run only tagged tasks.
+- "import_tasks:" can be used to include tasks/handlers etc from a file. This is more or less so that playbooks can be managed efficiently.
+And the tasks could also be used in multiple playbooks, like including a function.
+- Use "include_tasks:" to include tasks that may be doing dynamic tasks.
+- Use "import_playbook:" to import playbooks.
